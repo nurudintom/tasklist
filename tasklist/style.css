@@ -1,0 +1,126 @@
+/* ============================================================
+   style.css — Task List custom styles
+   Purpose: animations, task item transitions, filter tab state,
+            and minor overrides that are cleaner outside Tailwind.
+   ============================================================ */
+
+/* ----- Smooth slide-in for newly added task items ----- */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-item {
+  animation: slideInDown 0.2s ease both;
+}
+
+/* ----- Active filter tab styling ----- */
+.filter-btn {
+  color: #64748b; /* slate-500 */
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  color: #1D4ED8; /* blue-700 */
+}
+
+.filter-btn.active-filter {
+  background-color: #ffffff;
+  color: #1D4ED8; /* blue-700 */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ----- Completed task title: strikethrough + muted ----- */
+.task-title-completed {
+  text-decoration: line-through;
+  color: #94a3b8; /* slate-400 */
+}
+
+/* ----- Custom checkbox styling ----- */
+.task-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.125rem;      /* 18px */
+  height: 1.125rem;
+  min-width: 1.125rem;
+  border: 2px solid #cbd5e1; /* slate-300 */
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-checkbox:hover {
+  border-color: #3B82F6; /* blue-500 */
+}
+
+.task-checkbox:checked {
+  background-color: #1D4ED8; /* blue-700 */
+  border-color: #1D4ED8;
+}
+
+/* Checkmark tick drawn with pseudo-element */
+.task-checkbox:checked::after {
+  content: "";
+  display: block;
+  width: 0.3rem;
+  height: 0.55rem;
+  border: 2px solid #ffffff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+/* ----- Action icon buttons (edit / delete) ----- */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.15s, color 0.15s, transform 0.1s;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.action-btn:active {
+  transform: scale(0.9);
+}
+
+.btn-edit {
+  color: #3B82F6; /* blue-500 */
+}
+
+.btn-edit:hover {
+  background-color: #EFF6FF; /* blue-50 */
+  color: #1D4ED8;
+}
+
+.btn-delete {
+  color: #f87171; /* red-400 */
+}
+
+.btn-delete:hover {
+  background-color: #FEF2F2; /* red-50 */
+  color: #ef4444;
+}
+
+/* ----- Smooth fade for empty state ----- */
+#empty-state {
+  display: none;
+}
+
+#empty-state.show {
+  display: flex;
+}
